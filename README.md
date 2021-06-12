@@ -1,1 +1,1 @@
-"# Arctype_Tweets_Heatmap" 
+# Arctype Daily Tweets Heatmap
