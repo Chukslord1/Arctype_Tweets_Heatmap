@@ -26,12 +26,12 @@ username=["Cristiano","BarackObama","rihanna","TheRock"]
 def index(request):
     tweet_count = 0
     for i in username:
-        for status in Cursor(auth_api.user_timeline, id=i).items():
-            tweet_count = tweet_count + 1
-            try:
+        try:
+            for status in Cursor(auth_api.user_timeline, id=i).items():
+                tweet_count = tweet_count + 1
                 if status.created_at.year == 2021 and status.created_at.month == 5:
                     tweets_save= Tweets.objects.create(username=i,tweet_number=tweet_count,created_at=status.created_at.day,time=status.created_at.hour,retweet_count=status.retweet_count)
                     tweets_save.save()
-            except:
-                pass
+        except:
+            pass
     return HttpResponse('<h1>Loaded Tweets Data</h1>')
