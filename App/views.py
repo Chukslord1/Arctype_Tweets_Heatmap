@@ -18,24 +18,20 @@ access_token_secret="access_token_secret"
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 auth_api = API(auth)
-username="username"
-
+username=["Cristiano","BarackObama","rihanna","elonmusk","TheRock"]
 
 
 
 
 def index(request):
     tweet_count = 0
-    for status in Cursor(auth_api.user_timeline, id=username).items():
-        tweet_count = tweet_count + 1
-        if Tweets.objects.filter(tweet_number=tweet_count,created_at=status.created_at):
-            pass
-        else:
-            if status.created_at.year == 2021:
-                if status.retweeted==True:
-                    tweets_save= Tweets.objects.create(tweet_number=tweet_count,created_at=status.created_at.date(),retweeted="Retweeted")
-                    tweets_save.save()
-                else:
-                    tweets_save= Tweets.objects.create(tweet_number=tweet_count,created_at=status.created_at.date(),retweeted="Not Retweeted")
-                    tweets_save.save()
+    for i in username:
+        for status in Cursor(auth_api.user_timeline, id=i).items():
+            tweet_count = tweet_count + 1
+            if status.created_at.year == 2021 and status.created_at.month == 5:
+                tweets_save= Tweets.objects.create(username=i,tweet_number=tweet_count,created_at=status.created_at.date(),retweet_count=status.retweet_count)
+                tweets_save.save()
+            else:
+                continue
+
     return HttpResponse('<h1>Loaded Tweets Data</h1>')
