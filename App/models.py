@@ -4,7 +4,8 @@ from django.db import models
 class Tweets(models.Model):
     username= models.TextField()
     tweet_number = models.IntegerField()
-    created_at = models.DateField()
+    created_at = models.TextField()
+    time = models.TextField()
     retweet_count= models.IntegerField()
 
     def __str__(self):
