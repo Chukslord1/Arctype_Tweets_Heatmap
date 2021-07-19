@@ -6,8 +6,6 @@
 ## Arctype Docs
 https://docs.arctype.com/
 
-# Website Data
-https://understat.com
 
 ## run 
 
